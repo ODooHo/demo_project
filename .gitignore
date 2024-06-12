@@ -22,3 +22,5 @@ demo/.idea/misc.xml
 demo/.idea/vcs.xml
 
 demo/src/main/resources/application.yml
+
+.DS_Store

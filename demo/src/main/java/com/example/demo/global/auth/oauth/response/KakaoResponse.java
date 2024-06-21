@@ -1,4 +1,4 @@
-package com.example.demo.global.oauth.response;
+package com.example.demo.global.auth.oauth.response;
 
 import java.util.Map;
 

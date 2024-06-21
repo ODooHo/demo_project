@@ -1,11 +1,11 @@
-package com.example.demo.global.oauth.service;
+package com.example.demo.global.auth.oauth.service;
 
 import com.example.demo.api.user.UserRole;
 import com.example.demo.api.user.dto.UserDto;
 import com.example.demo.api.user.entity.UserEntity;
 import com.example.demo.api.user.repository.UserRepository;
-import com.example.demo.global.oauth.CustomOAuth2User;
-import com.example.demo.global.oauth.response.KakaoResponse;
+import com.example.demo.global.auth.oauth.CustomOAuth2User;
+import com.example.demo.global.auth.oauth.response.KakaoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;

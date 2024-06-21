@@ -1,4 +1,4 @@
-package com.example.demo.global.oauth;
+package com.example.demo.global.auth.oauth;
 
 import com.example.demo.api.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;

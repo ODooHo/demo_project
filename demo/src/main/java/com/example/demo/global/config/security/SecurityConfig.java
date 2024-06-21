@@ -1,9 +1,9 @@
 package com.example.demo.global.config.security;
 
+import com.example.demo.global.config.filter.JwtFilter;
 import com.example.demo.global.config.util.JwtUtil;
-import jakarta.servlet.http.HttpServletRequest;
+import com.example.demo.global.auth.oauth.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +13,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Collections;
 
@@ -65,8 +64,10 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .oauth2Login((oauth2Login) ->
-                        oauth2Login.userInfoEndpoint(userInfo -> userInfo
+                .oauth2Login((oauth2) ->
+                        oauth2
+                                .successHandler(customSuccessHandler)
+                                .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oAuth2UserService))
                 )
 

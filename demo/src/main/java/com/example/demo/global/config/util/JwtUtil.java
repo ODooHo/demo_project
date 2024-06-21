@@ -20,12 +20,6 @@ public class JwtUtil {
     }
 
 
-    @Value("${jwt.access-expired-time}")
-    Long accessExpiredTime;
-
-    @Value("${jwt.refresh-expired-time}")
-    Long refreshExpiredTime;
-
     public String getUsername(String token){
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("username",String.class);
     }
@@ -44,25 +38,25 @@ public class JwtUtil {
     }
 
     //access
-    public String creatAccessToken(String category, String username, String role){
+    public String creatAccessToken(String username, String role, long expiredTime){
         return Jwts.builder()
-                .claim("category",category)
+                .claim("category","access")
                 .claim("username",username)
                 .claim("role",role)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + accessExpiredTime))
+                .expiration(new Date(System.currentTimeMillis() + expiredTime))
                 .signWith(secretKey)
                 .compact();
     }
 
     //refresh
-    public String creatRefreshToken(String category, String username, String role){
+    public String creatRefreshToken(String username, String role,long expiredTime){
         return Jwts.builder()
-                .claim("category",category)
+                .claim("category","refresh")
                 .claim("username",username)
                 .claim("role",role)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + refreshExpiredTime))
+                .expiration(new Date(System.currentTimeMillis() + expiredTime))
                 .signWith(secretKey)
                 .compact();
     }

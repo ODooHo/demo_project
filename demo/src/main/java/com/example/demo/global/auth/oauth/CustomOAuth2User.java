@@ -2,6 +2,7 @@ package com.example.demo.global.auth.oauth;
 
 import com.example.demo.api.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+@ToString
 @RequiredArgsConstructor
 public class CustomOAuth2User implements OAuth2User {
 

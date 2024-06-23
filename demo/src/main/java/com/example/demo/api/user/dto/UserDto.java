@@ -2,11 +2,9 @@ package com.example.demo.api.user.dto;
 
 import com.example.demo.api.user.UserRole;
 import com.example.demo.api.user.entity.UserEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @NoArgsConstructor

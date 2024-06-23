@@ -8,6 +8,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -16,9 +17,11 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Collection;
 import java.util.Iterator;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -47,11 +50,15 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String accessToken = jwtUtil.creatAccessToken(username,role,accessExpiredTime);
         String refreshToken = jwtUtil.creatRefreshToken(username,role,refreshExpiredTime);
 
-        redisService.setValues(username, refreshToken, Duration.ofMills(refreshExpiredTime));
+        redisService.setValues(username, refreshToken, Duration.ofMillis(refreshExpiredTime));
 
         response.setHeader("access", "Bearer " + accessToken);
         response.addCookie(createCookie("refresh",refreshToken));
+
+        log.info(response.getHeader("access"));
         response.setStatus(HttpStatus.OK.value());
+
+
     }
 
     private Cookie createCookie(String key, String value) {

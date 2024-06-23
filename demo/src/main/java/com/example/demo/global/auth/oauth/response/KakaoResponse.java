@@ -1,7 +1,10 @@
 package com.example.demo.global.auth.oauth.response;
 
+import lombok.ToString;
+
 import java.util.Map;
 
+@ToString
 public class KakaoResponse {
 
     private final Map<String, Object> properties;

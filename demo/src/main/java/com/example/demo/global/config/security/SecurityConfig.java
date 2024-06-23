@@ -22,8 +22,8 @@ import java.util.Collections;
 public class SecurityConfig {
 
     private final CustomOAuth2UserService oAuth2UserService;
+    private final CustomSuccessHandler customSuccessHandler;
     private final JwtUtil jwtUtil;
-    private final JwtFilter jwtFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -56,20 +56,23 @@ public class SecurityConfig {
                                 .requestMatchers(
                                         "/",
                                         "/signUp",
-                                        "/login"
+                                        "/login",
+                                        "/api/v1/user/info"
                                 ).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login((oauth2) ->
                         oauth2
                                 .successHandler(customSuccessHandler)
                                 .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oAuth2UserService))
-                )
+                );
+
+        return http.build();
 
     }
 }

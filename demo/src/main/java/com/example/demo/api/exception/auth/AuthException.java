@@ -1,6 +1,5 @@
 package com.example.demo.api.exception.auth;
 
-import com.example.demo.api.exception.core.CoreErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

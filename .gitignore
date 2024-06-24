@@ -24,3 +24,7 @@ demo/.idea/vcs.xml
 demo/src/main/resources/application.yml
 
 .DS_Store
+
+demo/.idea/modules.xml
+
+demo/.idea/modules/demo.main.iml
